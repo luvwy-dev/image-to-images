@@ -32,7 +32,9 @@ def main():
         print("No such file:", ORIGINAL_NAME)
         quit()
 
-    MULTIPLE_CORES = take_input("Use multiprocessing? [True/False]: ", bool)
+    MULTIPLE_CORES = input("Use multiprocessing? [yes/no]: ")
+
+    MULTIPLE_CORES = MULTIPLE_CORES == "yes"
 
     if MULTIPLE_CORES:
         CORES = take_input("How many processes to spawn: ", int)
