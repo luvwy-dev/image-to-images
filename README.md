@@ -1,6 +1,8 @@
 # image-to-images
 You can use this Python script to convert a single image into a mosaic of small images.
 
+![](https://github.com/luvwy-dev/image-to-images/blob/main/showcase.gif)
+
 *this script supports multiprocessing*
 ### Dependencies
 ```bash
