@@ -51,6 +51,10 @@ def main():
 
     print(f"Loaded {len(images)} images")
 
+    if len(images) == 0:
+        print("No images found")
+        quit()
+
     print("Cropping and resizing..", end = " ")
     sys.stdout.flush()
 
@@ -58,10 +62,11 @@ def main():
         p = Pool(CORES)
         images = p.starmap(generation.path_to_img, zip(images, repeat(PIXEL_SIZE)))
     else:
-        images = starmap(generation.path_to_img, zip(images, repeat(PIXEL_SIZE)))
+        images = list(starmap(generation.path_to_img, zip(images, repeat(PIXEL_SIZE))))
 
     print("ok")
     print("Generating assets and calculating average color..", end = " ")
+    sys.stdout.flush()
 
     assets = []
     for img in images:
@@ -88,7 +93,7 @@ def main():
         p = Pool(CORES)
         finalAssets = p.starmap(generation.pixel_to_asset, zip(finalAssets, repeat(TRIES_PER_PIXEL), repeat(assets)))
     else:
-        finalAssets = map(generation.pixel_to_asset, zip(finalAssets, repeat(TRIES_PER_PIXEL), repeat(assets)))
+        finalAssets = list(starmap(generation.pixel_to_asset, zip(finalAssets, repeat(TRIES_PER_PIXEL), repeat(assets))))
 
     print("ok")
     print("Building final image..", end = " ")
